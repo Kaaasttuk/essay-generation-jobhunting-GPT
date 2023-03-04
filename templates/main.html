@@ -1,0 +1,913 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ProPen - Write Smarter With AI</title>
+  <meta content="" name="description">
+
+  <meta content="" name="keywords">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+  <!-- Favicons -->
+  <link href="{% static 'translate/assets/img/icon-forpropen.png' %}" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'translate/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'translate/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'translate/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'translate/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'translate/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'translate/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'translate/assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: FlexStart - v1.12.0
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <style>
+    .my_text
+    {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+        font-size: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="#hero" class="logo d-flex align-items-center">
+        <img src="{% static 'translate/assets/img/propen_nobackground.png' %}" alt="">
+        
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#howto">使い方</a></li>
+          <li><a class="nav-link scrollto" href="#essay">エッセイ作成</a></li>
+         
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="getstarted scrollto" href="#essay">Get Started</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">就活の救世主！</h1>
+          <h1 data-aos="fade-up">AIと就活を勝ち抜け！</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">ESのエッセイや面接での想定質問の大半をワンクリックでAIが自動で書いてくれます。</h2>
+            <h2 data-aos="fade-up" data-aos-delay="400">最短距離で就活成功しよう！</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="#essay" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get Started</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="{% static 'translate/assets/img/hero-img.png' %}" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+
+  <section id="essay" class="contact">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h2 class="my_text">AIと一緒に</h2>
+        <p class="my_text">エッセイ作成</p>
+      </header>
+
+      <div class="row gy-4">
+        
+        
+
+        <div class="col-lg-6">
+          
+          <form class="my_text" id="post-form">
+            {% csrf_token %}
+            <div class="row gy-4">
+
+              <div class="col-md-12">
+
+                <label for="select-option">設問カテゴリを選択してください:</label>
+                <select id="select-option" name="select-option" onchange="showInput()">
+                  <option value="">-- カテゴリを選択 --</option>
+                  <option value="gakuchika">ガクチカ・困難系</option>
+                  <option value="PR">自己紹介・PR・強み系</option>
+                  <option value="motivation">志望動機・将来やりたいこと系</option>
+                  <option value="one-word">あなたを一言で表すと</option>
+                  <option value="other-type">その他のタイプ</option>
+                </select>
+                <br>
+
+                <div id="gakuchika" style="display: none;">
+                  <br>
+                  <div class="col-md-6 ">
+                    <label for="company_name">会社名:</label>
+                    <input type="text" id="company_name" name="company_name">
+                  </div>
+
+                  <br>
+
+                  <div class="col-md-12">
+                    <label for="question">設問:</label>
+                    <textarea class="form-control" id = "question" name="question" rows="1" placeholder="（例）学生時代に頑張ったことは何ですか"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-6 ">
+                    <label for="word_limit">字数制限:</label>
+                    <input type="text" id="word_limit" name="word_limit" placeholder="（例）300">
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="episode">エピソード:</label>
+                    <textarea class="form-control" id="episode" name="episode" rows="1" placeholder="（例）バイトリーダーとして売り上げを二倍にした"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="other">（任意）その他入れたい要素:</label>
+                    <textarea class="form-control" id="other" name="other" rows="3" placeholder="次のような内容があるとよりいいエッセイになります。例：〇〇という難しい点があり、それを〇〇して解決した。"></textarea>
+                  </div>
+                  <br>
+
+                </div>
+
+                <div id="PR" style="display: none;">
+                  <br>
+                  <div class="col-md-6 ">
+                    <label for="company_name2">会社名:</label>
+                    <input type="text" id="company_name2" name="company_name2">
+                  </div>
+
+                  <br>
+
+                  <div class="col-md-12">
+                    <label for="question2">設問:</label>
+                    <textarea class="form-control" id = "question2" name="question2" rows="1" placeholder="例：自己PRをご入力ください。"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-6 ">
+                    <label for="word_limit2">字数制限:</label>
+                    <input type="text" id="word_limit2" name="word_limit2" placeholder="例：300">
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12 ">
+                    <label for="strength2">あなたの強み:</label>
+                    <textarea class="form-control"  id="strength2" name="strength2" rows="1" placeholder="例：素早く的確な判断能力"></textarea>
+                  </div>
+                  <br>
+
+                  <div class="col-md-12">
+                    <label for="episode2">根拠になるエピソード:</label>
+                    <textarea class="form-control" id="episode2" name="episode2" rows="1" placeholder="例：部活の大会で熱中症で倒れた友人を助けた経験"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="other2">（任意）その他入れたい要素:</label>
+                    <textarea class="form-control" id="other2" name="other2" rows="3" placeholder="他に入れてほしい内容を書くとよりいいエッセイになります。"></textarea>
+                  </div>
+                  <br>
+
+                </div>
+
+                <div id="motivation" style="display: none;">
+                  <br>
+                  <div class="col-md-6 ">
+                    <label for="company_name3">会社名:</label>
+                    <input type="text" id="company_name3" name="company_name3">
+                  </div>
+
+                  <br>
+
+                  <div class="col-md-12">
+                    <label for="question3">設問:</label>
+                    <textarea class="form-control" id = "question3" name="question3" rows="1" placeholder="設問をコピペ　例：志望動機を教えてください"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-6 ">
+                    <label for="word_limit3">字数制限:</label>
+                    <input type="text" id="word_limit3" name="word_limit3" placeholder="例：300">
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="vision3">将来のビジョン・夢:</label>
+                    <textarea class="form-control" id="vision3" name="vision3" rows="1" placeholder="例：テクノロジーでこれまでにないイノベーションを起こしたい"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="other3">（任意）その他入れたい要素:</label>
+                    <textarea class="form-control" id="other3" name="other3" rows="3" placeholder="入れてほしい内容を書くとよりいいエッセイになります。例：なぜそのビジョンを持つようになったか"></textarea>
+                  </div>
+                  <br>
+
+                </div>
+
+
+                <div id="one-word" style="display: none;">
+                  <br>
+                  <div class="col-md-6 ">
+                    <label for="company_name4">会社名:</label>
+                    <input type="text" id="company_name4" name="company_name4">
+                  </div>
+
+                  <br>
+                  
+                  <div class="col-md-12">
+                    <label for="other4">使いたいエピソードや情報:</label>
+                    <textarea class="form-control" id="other4" name="other4" rows="3" placeholder="一言であらわすためにあなたについて教えてください。例：人を喜ばせるのが好きで、毎週ルミネザよしもとに行っている"></textarea>
+                  </div>
+                  <br>
+
+                </div>
+
+                <div id="other-type" style="display: none;">
+                  
+                  <div class="col-md-6 ">
+                    <label for="company_name5">会社名:</label>
+                    <input type="text" id="company_name5" name="company_name5">
+                  </div>
+
+                  <br>
+
+                  <div class="col-md-12">
+                    <label for="question5">設問:</label>
+                    <textarea class="form-control" id = "question5" name="question5" rows="1" placeholder="ほかのどのカテゴリにも当てはまらない設問はこちら"></textarea>
+                  </div>
+                  <br>
+                  
+                  <div class="col-md-6 ">
+                    <label for="word_limit5">字数制限:</label>
+                    <input type="text" id="word_limit5" name="word_limit5" placeholder="例：300">
+                  </div>
+                  <br>
+                  
+                  
+                  <div class="col-md-12">
+                    <label for="other5">その他入れたい要素:</label>
+                    <textarea class="form-control" id="other5" name="other5" rows="3" placeholder="入れてほしい内容がすでにあるとよりいいエッセイになります。例：なぜそのビジョンを持つようになったか"></textarea>
+                  </div>
+                  <br>
+
+                </div>
+
+                <div></div>
+
+
+
+                
+
+
+                  <script type="text/javascript">
+                    function showInput() {
+                      var selectBox = document.getElementById("select-option");
+                      var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                      if (selectedValue == "gakuchika") {
+                        document.getElementById("gakuchika").style.display = "block";
+                        document.getElementById("PR").style.display = "none";
+                        document.getElementById("motivation").style.display = "none";
+                        document.getElementById("one-word").style.display = "none";
+                        document.getElementById("other-type").style.display = "none";
+                      } else if (selectedValue == "PR") {
+                        document.getElementById("gakuchika").style.display = "none";
+                        document.getElementById("PR").style.display = "block";
+                        document.getElementById("motivation").style.display = "none";
+                        document.getElementById("one-word").style.display = "none";
+                        document.getElementById("other-type").style.display = "none";
+                      } else if (selectedValue == "motivation") {
+                        document.getElementById("gakuchika").style.display = "none";
+                        document.getElementById("PR").style.display = "none";
+                        document.getElementById("motivation").style.display = "block";
+                        document.getElementById("one-word").style.display = "none";
+                        document.getElementById("other-type").style.display = "none";
+                      } else if (selectedValue == "one-word") {
+                        document.getElementById("gakuchika").style.display = "none";
+                        document.getElementById("PR").style.display = "none";
+                        document.getElementById("motivation").style.display = "none";
+                        document.getElementById("one-word").style.display = "block";
+                        document.getElementById("other-type").style.display = "none";
+                      } else if (selectedValue == "other-type") {
+                        document.getElementById("gakuchika").style.display = "none";
+                        document.getElementById("PR").style.display = "none";
+                        document.getElementById("motivation").style.display = "none";
+                        document.getElementById("one-word").style.display = "none";
+                        document.getElementById("other-type").style.display = "block";
+                      } else {
+                        document.getElementById("gakuchika").style.display = "none";
+                        document.getElementById("PR").style.display = "none";
+                        document.getElementById("motivation").style.display = "none";
+                        document.getElementById("one-word").style.display = "none";
+                        document.getElementById("other-type").style.display = "none";
+                      }
+                    }
+                  </script>
+
+              </div>
+
+              
+              
+
+              
+
+              
+              
+              <button type="submit" class="generate">エッセイ作成！</button>
+
+            </div>
+          </form>
+
+        </div>
+
+        
+       
+
+      
+        <div class="col-lg-6">
+
+          <div class="row gy-4">
+            
+            <div class="col-md-12">
+              
+              <textarea class="form-control" onkeyup="countChars(this)" id="ajax-response" name="ajax-response" rows="9" placeholder="エッセイがここに作成されます"></textarea>
+              <p>文字数:<span id="charCount">0</span></p>
+            </div>
+          </div>
+
+        </div>
+
+        <script>
+          function countChars(textarea) {
+            var count = textarea.value.length;
+            document.getElementById('charCount').innerHTML = count;
+          }
+        </script>
+
+        <script type="text/javascript">
+          $(document).on("submit", "#post-form", function(e){
+            e.preventDefault();
+            const dropdown = document.getElementById("select-option");
+            const selectedOption = dropdown.value;
+            let postData = {};
+            if (selectedOption === "gakuchika"){
+              postData = {
+                selected_option: "gakuchika",
+                company_name: $("#company_name").val(),
+                question: $("#question").val(),
+                word_limit: $("#word_limit").val(),
+                episode: $("#episode").val(),
+                other: $("#other").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+              }
+            } else if (selectedOption === "PR"){
+              postData = {
+                selected_option: "PR",
+                company_name2: $("#company_name2").val(),
+                question2: $("#question2").val(),
+                word_limit2: $("#word_limit2").val(),
+                strength2: $("#strength2").val(),
+                episode2: $("#episode2").val(),
+                other2: $("#other2").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+              }
+            } else if (selectedOption === "motivation"){
+              postData = {
+                selected_option: "motivation",
+                company_name3: $("#company_name3").val(),
+                question3: $("#question3").val(),
+                word_limit3: $("#word_limit3").val(),
+                vision3: $("#vision3").val(),
+                other3: $("#other3").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+
+            
+              }
+            } else if (selectedOption === "one-word"){
+              postData = {
+                selected_option: "one-word",
+                company_name4: $("#company_name4").val(),
+                other4: $("#other4").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+              }
+            } else if (selectedOption === "other-type"){
+              postData = {
+                selected_option: "other-type",
+                company_name5: $("#company_name5").val(),
+                question5: $("#question5").val(),
+                word_limit5: $("#word_limit5").val(),
+                other5: $("#other5").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+              }
+            }
+            $.ajax({
+              type: "POST",
+              url: '/chatbot/',
+              data: postData,
+              success: function(data){
+                $("#ajax-response").html(data);
+              }
+              
+            })
+          })
+        </script>
+
+      </div>
+
+    </div>
+
+  </section><!-- End Contact Section -->
+
+  <!-- <section id = "essay">
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" class="form-control" name="user_input">
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+    {% if response %}
+    <div>
+        {{ response|safe }}
+    </div>
+    {% endif %}
+  </section> -->
+
+
+
+
+
+
+  <main id="main">
+
+    <!-- ======= Values Section ======= -->
+    <section id="howto" class="values">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>コツをつかんでさらにお得！</h2>
+          <p>エッセイ作成の方法</p>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="box">
+              <img src="{% static 'translate/assets/img/values-1.png' %}" class="img-fluid" alt="">
+              <h3>カテゴリ選択、各項目入力！</h3>
+              <p>ESエッセイの各パターンをうまく書くために重要な要素を入力できるようになっています。</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="box">
+              <img src="{% static 'translate/assets/img/values-2.png' %}" class="img-fluid" alt="">
+              <h3>生成ボタンをクリック！</h3>
+              <p>生成ボタンを押して少し待つと、テキストボックスにAIが書いてくれたエッセイが表示されます。</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+            <div class="box">
+              <img src="{% static 'translate/assets/img/values-3.png' %}" class="img-fluid" alt="">
+              <h3>最後に手直しをして完成！</h3>
+              <p>AIはまだ完璧ではありません。最後にチェックをして、最高のエッセイに仕上げましょう！</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Values Section -->
+
+  
+
+    <!-- ======= Pricing Section ======= --> 
+    <!-- <section id="pricing" class="pricing">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Pricing</h2>
+          <p>Check our Pricing</p>
+        </header>
+
+        <div class="row gy-4" data-aos="fade-left">
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <h3 style="color: #07d5c0;">Free Plan</h3>
+              <div class="price"><sup>$</sup>0<span> / mo</span></div>
+              <img src="assets/img/pricing-free.png" class="img-fluid" alt="">
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li class="na">Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="box">
+              <span class="featured">Featured</span>
+              <h3 style="color: #65c600;">Starter Plan</h3>
+              <div class="price"><sup>$</sup>19<span> / mo</span></div>
+              <img src="assets/img/pricing-starter.png" class="img-fluid" alt="">
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="box">
+              <h3 style="color: #ff901c;">Business Plan</h3>
+              <div class="price"><sup>$</sup>29<span> / mo</span></div>
+              <img src="assets/img/pricing-business.png" class="img-fluid" alt="">
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li>Massa ultricies mi</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="box">
+              <h3 style="color: #ff0071;">Ultimate Plan</h3>
+              <div class="price"><sup>$</sup>49<span> / mo</span></div>
+              <img src="assets/img/pricing-ultimate.png" class="img-fluid" alt="">
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li>Massa ultricies mi</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="faq" class="faq">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>F.A.Q</h2>
+          <p>Frequently Asked Questions</p>
+        </header>
+
+        <div class="row">
+          <div class="col-lg-6">
+            F.A.Q List 1
+            <div class="accordion accordion-flush" id="faqlist1">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    Non consectetur a erat nam at lectus urna duis?
+                  </button>
+                </h2>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                  </button>
+                </h2>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                  </button>
+                </h2>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                  <div class="accordion-body">
+                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+
+            F.A.Q List 2
+            <div class="accordion accordion-flush" id="faqlist2">
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
+                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                  </button>
+                </h2>
+                <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                  <div class="accordion-body">
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
+                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                  </button>
+                </h2>
+                <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                  <div class="accordion-body">
+                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
+                    Varius vel pharetra vel turpis nunc eget lorem dolor?
+                  </button>
+                </h2>
+                <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                  <div class="accordion-body">
+                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>End F.A.Q Section -->
+
+    
+
+    
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Contact</h2>
+          <p>フィードバック募集中</p>
+        </header>
+
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdchrtKlPoPsAWiuxBsPmRosUnEL6zlgHSOQ9whp43nbw-6vA/viewform?embedded=true" width="640" height="463" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+        <!-- <div class="row gy-4">
+
+          <div class="col-lg-6">
+
+            <div class="row gy-4">
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Address</h3>
+                  <p>A108 Adam Street,<br>New York, NY 535022</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>info@example.com<br>contact@example.com</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-clock"></i>
+                  <h3>Open Hours</h3>
+                  <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+
+            
+            <form action="forms/contact.php" method="post" class="php-email-form">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <!-- <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 text-center">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="main.html" class="logo d-flex align-items-center">
+              <img src="{% static 'translate/assets/img/propen_nobackground.png' %}" alt="">
+              
+            </a>
+            <p>学生の趣味でつくりました。</p>
+            <!-- <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div> -->
+          </div>
+
+          <!-- <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+         All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+      </div>
+    </div> -->
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'translate/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'translate/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'translate/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

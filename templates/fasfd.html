@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dropdown with Different Inputs</title>
+</head>
+<body>
+	<label for="select-option">Select an option:</label>
+	<select id="select-option" name="select-option" onchange="showInput()">
+		<option value="">-- Select an option --</option>
+		<option value="input1">Input 1</option>
+		<option value="input2">Input 2</option>
+		<option value="input3">Input 3</option>
+	</select>
+
+	<div id="input1" style="display: none;">
+		<label for="input1-text">Input 1 Text:</label>
+		<input type="text" id="input1-text" name="input1-text">
+	</div>
+
+	<div id="input2" style="display: none;">
+		<label for="input2-email">Input 2 Email:</label>
+		<input type="email" id="input2-email" name="input2-email">
+	</div>
+
+	<div id="input3" style="display: none;">
+		<label for="input3-number">Input 3 Number:</label>
+		<input type="number" id="input3-number" name="input3-number">
+	</div>
+
+	<script type="text/javascript">
+		function showInput() {
+			var selectBox = document.getElementById("select-option");
+			var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+			if (selectedValue == "input1") {
+				document.getElementById("input1").style.display = "block";
+				document.getElementById("input2").style.display = "none";
+				document.getElementById("input3").style.display = "none";
+			} else if (selectedValue == "input2") {
+				document.getElementById("input1").style.display = "none";
+				document.getElementById("input2").style.display = "block";
+				document.getElementById("input3").style.display = "none";
+			} else if (selectedValue == "input3") {
+				document.getElementById("input1").style.display = "none";
+				document.getElementById("input2").style.display = "none";
+				document.getElementById("input3").style.display = "block";
+			} else {
+				document.getElementById("input1").style.display = "none";
+				document.getElementById("input2").style.display = "none";
+				document.getElementById("input3").style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>
